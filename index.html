@@ -56,6 +56,7 @@ img {
 
 <script>
 async function predict() {
+
     const fileInput = document.getElementById("imageInput");
     const resultDiv = document.getElementById("result");
 
@@ -70,43 +71,47 @@ async function predict() {
     const reader = new FileReader();
 
     reader.onloadend = async function () {
+
         const base64 = reader.result.split(",")[1];
 
-        const response = await fetch("https://serverless.roboflow.com/tiu-hwuau/workflows/custom-workflow", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                api_key: "cf29DAu7zROhHc0V8FxS",
-                inputs: {
-                    image: {
-                        type: "base64",
-                        value: base64
+        const response = await fetch(
+            "https://serverless.roboflow.com/tiu-hwuau/workflows/custom-workflow",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    api_key: "SENING_API_KEY",
+                    inputs: {
+                        image: {
+                            type: "base64",
+                            value: base64
+                        }
                     }
-                }
-            })
-        });
+                })
+            }
+        );
 
         const data = await response.json();
         console.log(data);
 
-      if (
-    data.outputs &&
-    data.outputs.length > 0 &&
-    data.outputs[0].predictions &&
-    data.outputs[0].predictions.length > 0
-) {
-    const prediction = data.outputs[0].predictions[0];
+        if (
+            data.outputs &&
+            data.outputs.length > 0 &&
+            data.outputs[0].predictions &&
+            data.outputs[0].predictions.length > 0
+        ) {
+            const prediction = data.outputs[0].predictions[0];
 
-    resultDiv.innerHTML =
-        "Kasallik: " + prediction.class +
-        "<br>Ishonchlilik: " +
-        (prediction.confidence * 100).toFixed(2) + "%";
-} else {
-    resultDiv.innerHTML = "Natija topilmadi.";
-}
-;
+            resultDiv.innerHTML =
+                "Kasallik: " + prediction.class +
+                "<br>Ishonchlilik: " +
+                (prediction.confidence * 100).toFixed(2) + "%";
+        } else {
+            resultDiv.innerHTML = "Natija topilmadi.";
+        }
+    };
 
     reader.readAsDataURL(file);
 }
