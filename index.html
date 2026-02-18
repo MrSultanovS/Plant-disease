@@ -91,16 +91,28 @@ async function predict() {
         const data = await response.json();
         console.log(data);
 
-        if (data.outputs && data.outputs[0].predictions.length > 0) {
-            const prediction = data.outputs[0].predictions[0];
+        if (data.outputs && data.outputs.length > 0) {
+    const output = data.outputs[0];
 
-            resultDiv.innerHTML =
-                "Kasallik: " + prediction.class +
-                "<br>Ishonchlilik: " + (prediction.confidence * 100).toFixed(2) + "%";
-        } else {
-            resultDiv.innerHTML = "Natija topilmadi.";
-        }
-    };
+    // Agar predictions mavjud bo‘lsa
+    if (output.predictions && output.predictions.length > 0) {
+        const prediction = output.predictions[0];
+        resultDiv.innerHTML =
+            "Kasallik: " + prediction.class +
+            "<br>Ishonchlilik: " + (prediction.confidence * 100).toFixed(2) + "%";
+    }
+
+    // Agar classification bo‘lsa (predictions yo‘q)
+    else if (output.class) {
+        resultDiv.innerHTML =
+            "Kasallik: " + output.class +
+            "<br>Ishonchlilik: " + (output.confidence * 100).toFixed(2) + "%";
+    }
+
+    else {
+        resultDiv.innerHTML = "Natija topilmadi.";
+    }
+};
 
     reader.readAsDataURL(file);
 }
