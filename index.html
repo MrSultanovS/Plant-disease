@@ -1,57 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paxta Bargi Kasalligini Aniqlash</title>
+    <meta charset="UTF-8">
+    <title>Paxta Bargi Kasalligini Aniqlash</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f4f4f4;
+            padding: 40px;
+        }
 
-<style>
-body {
-    font-family: Arial;
-    text-align: center;
-    background: #f4f4f4;
-    padding: 20px;
-}
-.container {
-    max-width: 400px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-button {
-    width: 100%;
-    padding: 12px;
-    background: green;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    margin-top: 10px;
-}
-#result {
-    margin-top: 15px;
-    font-weight: bold;
-}
-img {
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
-}
-</style>
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkgreen;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
-<h2>Paxta Bargi Kasalligini Aniqlash</h2>
+    <h2>Paxta Bargi Kasalligini Aniqlash</h2>
 
-<input type="file" id="imageInput" accept="image/*">
-<img id="preview" />
+    <input type="file" id="imageInput"><br><br>
 
-<button onclick="predict()">Kasallikni aniqlash</button>
+    <button onclick="predict()">Kasallikni aniqlash</button>
 
-<div id="result"></div>
+    <div id="result"></div>
 </div>
 
 <script>
@@ -82,7 +81,7 @@ async function predict() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    api_key: cf29DAu7zROhHc0V8FxS,
+                    api_key: "SENING_API_KEY",
                     inputs: {
                         image: {
                             type: "base64",
