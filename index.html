@@ -96,20 +96,21 @@ async function predict() {
         console.log(data);
 
         if (
-            data.outputs &&
-            data.outputs.length > 0 &&
-            data.outputs[0].predictions &&
-            data.outputs[0].predictions.length > 0
-        ) {
-            const prediction = data.outputs[0].predictions[0];
+    data.outputs &&
+    data.outputs.length > 0 &&
+    data.outputs[0].predictions &&
+    data.outputs[0].predictions.length > 0
+) {
+    const prediction = data.outputs[0].predictions[0];
 
-            resultDiv.innerHTML =
-                "Kasallik: " + prediction.class +
-                "<br>Ishonchlilik: " +
-                (prediction.confidence * 100).toFixed(2) + "%";
-        } else {
-            resultDiv.innerHTML = "Natija topilmadi.";
-        }
+    resultDiv.innerHTML =
+        "Kasallik: " + prediction.class +
+        "<br>Ishonchlilik: " +
+        (prediction.confidence * 100).toFixed(2) + "%";
+} else {
+    resultDiv.innerHTML = "Natija topilmadi.";
+}
+
     };
 
     reader.readAsDataURL(file);
